@@ -4,10 +4,11 @@
 Using Spring-Data-Redis + Jedis to connect to a Redis Cluster, under high concurrency, threads are blocked forever in getting Jedis connection resource, even though all borrowed Jedis connections are supposed to be returned.
 
 # versions
-| spring-data-redis | 2.1.4 |
-|-------------------|:-----:|
-| jedis             | 2.9.1 |
-| commons-pool2     | 2.6.0 |
+| software          | version|
+|-------------------|:------:|
+| spring-data-redis | 2.1.4  |
+| jedis             | 2.9.1  |
+| commons-pool2     | 2.6.0  |
 
 # redis cluster
 localhost:30001~30006
