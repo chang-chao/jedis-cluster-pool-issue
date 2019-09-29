@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.2.RELEASE'
+		springBootVersion = '2.1.8.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -41,7 +41,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-redis') {
         exclude group: 'io.lettuce', module: 'lettuce-core'
     }
-    implementation('redis.clients:jedis:2.9.3')
+    implementation('redis.clients:jedis')
     compile ('org.apache.commons:commons-lang3')
     compileOnly 'org.projectlombok:lombok:1.18.4'
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
