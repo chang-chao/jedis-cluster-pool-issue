@@ -1,4 +1,5 @@
 # jedis-cluster-pool-issue
+a sample project to reproduce [this issue](https://github.com/xetorthio/jedis/issues/2068)
 
 # issue
 Using Spring-Data-Redis + Jedis to connect to a Redis Cluster, under high concurrency, threads are blocked forever in getting Jedis connection resource, even though all borrowed Jedis connections are supposed to be returned.
