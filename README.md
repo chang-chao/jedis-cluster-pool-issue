@@ -16,7 +16,7 @@ localhost:30001~30006
 
 # command to reproduce
 ```
-wrk -t60 -c60 -d30s http://localhost:8080/foo/
+wrk -t60 -c60 -d10m http://localhost:8080/foo/
 ```
 
 # result
