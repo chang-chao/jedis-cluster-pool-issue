@@ -1,6 +1,6 @@
 package me.changchao;
 
-import me.changchao.metrics.CommonsObjectPoolMetrics;
+import me.changchao.metrics.CommonsObjectPool2Metrics;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +12,7 @@ public class JedisClusterIssueApplication {
   }
 
   @Bean
-  CommonsObjectPoolMetrics commonsObjectPoolMetrics() {
-    return new CommonsObjectPoolMetrics();
+  CommonsObjectPool2Metrics commonsObjectPoolMetrics() {
+    return new CommonsObjectPool2Metrics();
   }
 }

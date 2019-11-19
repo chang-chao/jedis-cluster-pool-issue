@@ -36,8 +36,8 @@ import java.util.function.ToDoubleFunction;
 
 import static java.util.Collections.emptyList;
 
-public class CommonsObjectPoolMetrics implements MeterBinder, AutoCloseable {
-  private final Logger logger = LoggerFactory.getLogger(CommonsObjectPoolMetrics.class);
+public class CommonsObjectPool2Metrics implements MeterBinder, AutoCloseable {
+  private final Logger logger = LoggerFactory.getLogger(CommonsObjectPool2Metrics.class);
   private static final String JMX_DOMAIN = "org.apache.commons.pool2";
   private static final String METRIC_NAME_PREFIX = "commons.pool2.";
 
@@ -47,15 +47,15 @@ public class CommonsObjectPoolMetrics implements MeterBinder, AutoCloseable {
   private final Iterable<Tag> tags;
   private final List<Runnable> notificationListenerCleanUpRunnables = new CopyOnWriteArrayList<>();
 
-  public CommonsObjectPoolMetrics() {
+  public CommonsObjectPool2Metrics() {
     this(emptyList());
   }
 
-  public CommonsObjectPoolMetrics(Iterable<Tag> tags) {
+  public CommonsObjectPool2Metrics(Iterable<Tag> tags) {
     this(getMBeanServer(), tags);
   }
 
-  public CommonsObjectPoolMetrics(MBeanServer mBeanServer, Iterable<Tag> tags) {
+  public CommonsObjectPool2Metrics(MBeanServer mBeanServer, Iterable<Tag> tags) {
     this.mBeanServer = mBeanServer;
     this.tags = tags;
   }
