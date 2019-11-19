@@ -109,6 +109,7 @@ public class CommonsObjectPool2Metrics implements MeterBinder, AutoCloseable {
   private Iterable<Tag> nameTag(ObjectName name)
       throws AttributeNotFoundException, MBeanException, ReflectionException,
           InstanceNotFoundException {
+    // we want to include the name and factoryType as tags
     String factoryType = mBeanServer.getAttribute(name, "FactoryType").toString();
     Tags tags = Tags.of("name", name.getKeyProperty("name"), "factoryType", factoryType);
     return tags;
@@ -146,6 +147,8 @@ public class CommonsObjectPool2Metrics implements MeterBinder, AutoCloseable {
    */
   private void registerNotificationListener(String type, BiConsumer<ObjectName, Tags> perObject) {
     NotificationListener notificationListener =
+        // in notifcation listener, we cannot get attributes for the registered object,
+        // so we do it later time in a separate thread.
         (notification, handback) -> {
           executor.execute(
               () -> {
