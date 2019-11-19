@@ -44,7 +44,7 @@ public class CommonsObjectPoolMetrics implements MeterBinder, AutoCloseable {
 
   Executor executor = Executors.newSingleThreadExecutor();
   private static final String JMX_DOMAIN = "org.apache.commons.pool2";
-  private static final String METRIC_NAME_PREFIX = "common.object.pool.";
+  private static final String METRIC_NAME_PREFIX = "commons.pool2.";
 
   private final MBeanServer mBeanServer = getMBeanServer();
   private final List<Runnable> notificationListenerCleanUpRunnables = new CopyOnWriteArrayList<>();
@@ -64,7 +64,36 @@ public class CommonsObjectPoolMetrics implements MeterBinder, AutoCloseable {
     registerMetricsEventually(
         "GenericObjectPool",
         (o, tags) -> {
-          registerGaugeForObject(registry, o, "MaxIdle", tags, "max idle", "count");
+          registerGaugeForObject(registry, o, "MaxIdle", tags, "max idle", null);
+          registerGaugeForObject(registry, o, "MinIdle", tags, "min idle", null);
+          registerGaugeForObject(registry, o, "NumIdle", tags, "num idle", null);
+          registerGaugeForObject(registry, o, "NumWaiters", tags, "num waiters", null);
+          registerGaugeForObject(registry, o, "CreatedCount", tags, "created count", null);
+          registerGaugeForObject(registry, o, "BorrowedCount", tags, "borrowed count", null);
+          registerGaugeForObject(registry, o, "ReturnedCount", tags, "returned count", null);
+          registerGaugeForObject(registry, o, "DestroyedCount", tags, "destroyed count", null);
+          registerGaugeForObject(
+              registry, o, "DestroyedByEvictorCount", tags, "destroyed by evictor count", null);
+          registerGaugeForObject(
+              registry,
+              o,
+              "DestroyedByBorrowValidationCount",
+              tags,
+              "destroyed by borrow validation count",
+              null);
+          registerGaugeForObject(
+              registry, o, "MaxBorrowWaitTimeMillis", tags, "max borrow wait time", "milliseconds");
+          registerGaugeForObject(
+              registry, o, "MeanActiveTimeMillis", tags, "mean active time", "milliseconds");
+          registerGaugeForObject(
+              registry, o, "MeanIdleTimeMillis", tags, "mean idle time", "milliseconds");
+          registerGaugeForObject(
+              registry,
+              o,
+              "MeanBorrowWaitTimeMillis",
+              tags,
+              "mean borrow wait time",
+              "milliseconds");
         });
   }
 
