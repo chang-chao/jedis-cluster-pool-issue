@@ -250,7 +250,6 @@ public class CommonsObjectPoolMetrics implements MeterBinder, AutoCloseable {
       String jmxMetricName) {
     return s ->
         safeDouble(
-            jmxMetricName,
             () -> {
               if (!s.isRegistered(o)) {
                 registry.remove(meter.get());
@@ -259,7 +258,7 @@ public class CommonsObjectPoolMetrics implements MeterBinder, AutoCloseable {
             });
   }
 
-  private double safeDouble(String jmxMetricName, Callable<Object> callable) {
+  private double safeDouble(Callable<Object> callable) {
     try {
       return Double.parseDouble(callable.call().toString());
     } catch (Exception e) {
