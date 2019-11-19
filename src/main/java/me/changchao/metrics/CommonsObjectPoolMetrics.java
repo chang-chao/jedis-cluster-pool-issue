@@ -7,7 +7,6 @@ import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.Tags;
 import io.micrometer.core.instrument.binder.MeterBinder;
 import io.micrometer.core.lang.Nullable;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +36,6 @@ import java.util.function.ToDoubleFunction;
 
 import static java.util.Collections.emptyList;
 
-@Slf4j
 public class CommonsObjectPoolMetrics implements MeterBinder, AutoCloseable {
 
   private final Logger logger = LoggerFactory.getLogger(CommonsObjectPoolMetrics.class);
@@ -115,7 +113,7 @@ public class CommonsObjectPoolMetrics implements MeterBinder, AutoCloseable {
           try {
             nameTags = nameTag(o);
           } catch (Exception e) {
-            log.error("exception in determining name tag", e);
+            logger.error("exception in determining name tag", e);
           }
           perObject.accept(o, Tags.concat(tags, nameTags));
         }
@@ -219,7 +217,8 @@ public class CommonsObjectPoolMetrics implements MeterBinder, AutoCloseable {
   }
 
   private static String sanitize(String value) {
-    return value.replaceAll("-", ".");
+    String s = value.replaceAll("-", ".");
+    return s.substring(0, 1).toLowerCase() + s.substring(1);
   }
 
   private void registerGaugeForObject(
