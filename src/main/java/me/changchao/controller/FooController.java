@@ -19,16 +19,23 @@ public class FooController {
   @Autowired RedisTemplate redisTemplate;
   @Autowired FooService fooService;
 
-  @RequestMapping("/")
+  @RequestMapping("/save")
   @SneakyThrows
-  public ResponseEntity<String> foo() {
-    log.info("foo");
+  public ResponseEntity<String> save() {
+    log.info("save start");
     String user = "u" + RandomUtils.nextInt(0, 2000);
-    if (!redisTemplate.hasKey("users::".concat(user))) {
-      user = fooService.insertAndCache(user);
-    }
+    user = fooService.save(user);
 
-    Thread.sleep(100);
+    return new ResponseEntity<>(user, HttpStatus.OK);
+  }
+
+  @RequestMapping("/fetch")
+  @SneakyThrows
+  public ResponseEntity<String> fetch() {
+    log.info("fetch start");
+    String user = "u" + RandomUtils.nextInt(0, 2000);
+    user = fooService.fetch(user);
+
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
 }
