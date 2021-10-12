@@ -1,4 +1,6 @@
 # jedis-cluster-pool-issue
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fchang-chao%2Fjedis-cluster-pool-issue.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fchang-chao%2Fjedis-cluster-pool-issue?ref=badge_shield)
+
 a sample project to reproduce [this issue](https://github.com/xetorthio/jedis/issues/2068)
 
 # issue
@@ -29,3 +31,7 @@ seems sometimes the borrowed Jedis object did not get returned properly.
 we can see this from the following image.
 <img src="img/pool-jmx.jpg">
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fchang-chao%2Fjedis-cluster-pool-issue.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fchang-chao%2Fjedis-cluster-pool-issue?ref=badge_large)
